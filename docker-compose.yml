@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  drupal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: merge_drupal
+    ports:
+      - 5200:80
+    volumes:
+      - .:/opt/drupal
+    restart: always
+  db:
+    image: mariadb:10.3
+    container_name: merge_db
+    restart: always
+    ports:
+      - "13406:3306"
+    environment:
+      MYSQL_USER: merge
+      MYSQL_PASSWORD: merge
+      MYSQL_ROOT_PASSWORD: merge
+      MYSQL_DATABASE: merge
+  phpmyadmin:
+    image: phpmyadmin
+    platform: linux/amd64
+    container_name: merge_pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      UPLOAD_LIMIT: 300M
+    restart: always
+    ports:
+      - 5201:80
+
