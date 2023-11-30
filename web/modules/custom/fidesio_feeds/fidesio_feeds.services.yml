@@ -1,0 +1,6 @@
+services:
+  fidesio_feeds.feeds_helper:
+    class: Drupal\fidesio_feeds\Service\FeedsHelper
+    arguments:
+     - '@entity_type.manager'
+

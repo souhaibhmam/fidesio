@@ -1,0 +1,27 @@
+uuid: a3c1035f-be18-48e7-be45-9ddd10dd54a8
+langcode: en
+status: true
+dependencies:
+  module:
+    - fidesio_feeds
+    - system
+  theme:
+    - olivero
+id: olivero_lastarticles
+theme: olivero
+region: sidebar
+weight: -7
+provider: null
+plugin: last_articles_block
+settings:
+  id: last_articles_block
+  label: 'Last articles'
+  label_display: visible
+  provider: fidesio_feeds
+  last_articles_block_limit: 3
+  last_articles_block_cache_age: 12
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

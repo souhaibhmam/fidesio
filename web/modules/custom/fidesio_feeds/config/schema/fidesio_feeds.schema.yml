@@ -1,0 +1,10 @@
+block.settings.last_articles_block:
+  type: block_settings
+  label: 'Last articles block settings'
+  mapping:
+    last_articles_block_limit:
+      type: integer
+      label: 'Number of articles to list in the block'
+    last_articles_block_cache_age:
+      type: integer
+      label: 'Number of hours before cache get invalidated.'

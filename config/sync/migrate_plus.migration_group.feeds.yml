@@ -1,0 +1,10 @@
+uuid: f709aee9-fb87-4c1f-8c56-84eb0fe912ca
+langcode: en
+status: true
+dependencies: {  }
+id: feeds
+label: Feeds
+description: 'Import data from external rss feeds.'
+source_type: null
+module: null
+shared_configuration: null

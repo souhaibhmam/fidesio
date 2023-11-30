@@ -1,0 +1,17 @@
+<div class="last-articles">
+  {% for article in articles %}
+    <div class="article">
+      {% if article.title.value %}
+        <h3 class="title">{{ article.title.value }}</h3>
+      {% endif %}
+      {% if article.body.value %}
+        {% set body = {
+          '#type': 'processed_text',
+          '#text':  article.body.value,
+          '#format': 'full_html',
+        } %}
+        <p class="description">{{ body }}</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>

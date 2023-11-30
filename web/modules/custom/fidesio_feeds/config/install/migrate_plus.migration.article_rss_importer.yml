@@ -1,0 +1,40 @@
+id: article_rss_importer
+label: Article rss importer
+migration_group: feeds
+status: true
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls: 'https://www.drupal.org/planet/rss.xml'
+  data_parser_plugin: simple_xml
+  item_selector: /rss/channel/item
+  fields:
+    -
+      name: title
+      label: 'Title'
+      selector: title
+    -
+      name: description
+      label: 'Description'
+      selector: description
+    -
+      name: link
+      label: 'Origin link'
+      selector: link
+
+  ids:
+    title:
+      type: string
+process:
+  title: title
+  body: description
+  field_remote_url: link
+  status:
+    plugin: default_value
+    default_value: 1
+  type:
+    plugin: default_value
+    default_value: article
+destination:
+  plugin: 'entity:node'
+

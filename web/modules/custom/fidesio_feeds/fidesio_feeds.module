@@ -1,0 +1,40 @@
+<?php
+
+use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\migrate\MigrateExecutable;
+use Drupal\migrate\MigrateMessage;
+
+/**
+ * Implements hook_cron().
+ */
+function fidesio_feeds_cron() {
+  $current_time = \Drupal::time()->getRequestTime();
+  if ('06:00' == date('H:i',$current_time)) {
+    $article_rss_migration = \Drupal::service('plugin.manager.migration')->createInstance('article_rss_importer');
+
+    // Check if the migration is currently not running else stop it.
+    if ($article_rss_migration->getStatus() !== MigrationInterface::STATUS_IDLE) {
+      $article_rss_migration->setStatus(MigrationInterface::STATUS_IDLE);
+    }
+
+    // Prepare migration for update.
+    $article_rss_migration->getIdMap()->prepareUpdate();
+
+    // Start import.
+    $executable = new MigrateExecutable($article_rss_migration, new MigrateMessage());
+    $executable->import();
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function fidesio_feeds_theme($existing, $type, $theme, $path) {
+  return [
+    'last_articles' => [
+      'variables' => [
+        'articles' => NULL,
+      ],
+    ],
+  ];
+}

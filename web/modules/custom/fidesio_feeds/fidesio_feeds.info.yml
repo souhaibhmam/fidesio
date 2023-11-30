@@ -1,0 +1,5 @@
+name: fidesio
+type: module
+description: Import and manage articles from drupal feeds.
+core_version_requirement: ^10
+
